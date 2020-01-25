@@ -5,8 +5,10 @@
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <script src="scripts/jquery-3.4.1.min.js"></script>
   </head>
   <body>
+
     <div class="popup-container">
       <h1>Gestures Manual</h1>
       <div class="gestures-container">
@@ -27,6 +29,13 @@
           <p>Select</p>
         </div>
       </div>
+      <label class="switch">
+        <input id="checkbox" type="checkbox">
+        <span class="slider round"></span>
+      </label>
+      <p>ON / OFF</p>
+      <video id="player" controls style="display:none;" ></video>
     </div>
   </body>
+  <script src="scripts/livestream.js"></script>
 </html>
