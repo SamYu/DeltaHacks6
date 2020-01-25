@@ -13,3 +13,6 @@
 //         {code: 'document.body.style.backgroundColor = "' + color + '";'});
 //   });
 // };
+document.addEventListener('DOMContentLoaded', function () {
+  console.log('hellloooo');
+});
