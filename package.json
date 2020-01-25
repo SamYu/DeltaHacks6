@@ -1,0 +1,37 @@
+{
+  "name": "DeltaHacks6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./server/app.js",
+    "server": "babel-node ./server/app.js",
+    "dev": "NODE_ENV=development && npm run server",
+    "clean": "rm -rf dist",
+    "build": "babel ./server --out-dir dist",
+    "watch": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamYu/DeltaHacks6.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SamYu/DeltaHacks6/issues"
+  },
+  "homepage": "https://github.com/SamYu/DeltaHacks6#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.8.9"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/node": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "eslint": "^6.8.0",
+    "nodemon": "^2.0.2"
+  }
+}
