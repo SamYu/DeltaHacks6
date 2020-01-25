@@ -2,7 +2,7 @@
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({color: '#3aa757'}, function() {
-    console.log("The color is green.");
+    console.log("The color is blue.");
   });
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
     chrome.declarativeContent.onPageChanged.addRules([{
@@ -13,4 +13,9 @@ chrome.runtime.onInstalled.addListener(function() {
           actions: [new chrome.declarativeContent.ShowPageAction()]
     }]);
   });
+});
+
+chrome.browserAction.onClicked.addListener(function() {
+    console.log('test');
+    chrome.tabs.create({ url: chrome.extension.getURL('test.html') });
 });
