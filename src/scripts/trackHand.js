@@ -1,7 +1,7 @@
 cv['onRuntimeInitialized']=()=>{
     // Define upper and lower bounds
-    let skinColorLower = src => new cv.Mat(src.rows, src.cols, src.type(), [0, 48, 80, 0]);
-    let skinColorUpper = src => new cv.Mat(src.rows, src.cols, src.type(), [150, 150, 150, 255]);
+    let skinColorLower = src => new cv.Mat(src.rows, src.cols, src.type(), [45, 48, 75, 0]);
+    let skinColorUpper = src => new cv.Mat(src.rows, src.cols, src.type(), [130, 150, 190, 255]);
     // Make mask
     const makeHandMask = (src, dest) => {
         // filter by skin color
@@ -12,16 +12,27 @@ cv['onRuntimeInitialized']=()=>{
         // remove noise
           cv.threshold(dest, dest, 200, 255, cv.THRESH_BINARY);
     };
-    const getHandContour = (src, dest) => {
-        const contours = []
+    const getHandContour = (src, dst) => {
+        const contours = new cv.MatVector()
+        const hierarchy = new cv.Mat()
         cv.findContours(
             src,
             contours,
-          cv.RETR_EXTERNAL,
-          cv.CHAIN_APPROX_SIMPLE
+            hierarchy,
+            cv.RETR_EXTERNAL,
+            cv.CHAIN_APPROX_SIMPLE
         );
-        // largest contour
-        return contours.sort((c0, c1) => c1.area - c0.area)[0];
+        let maxAreaContour = contours.size() > 0 ? contours.get(0) : null;
+        for (let i = 0; i < contours.size(); ++i) {
+          // let color = new cv.Scalar(Math.round(Math.random() * 255), Math.round(Math.random() * 255),
+          //                           Math.round(Math.random() * 255));
+          // cv.drawContours(dst, contours, i, color, 2, cv.LINE_8, hierarchy, 100);
+          const area = cv.contourArea(contours.get(i));
+          if (area > cv.contourArea(maxAreaContour)) {
+            maxAreaContour = contours.get(i);
+          }
+      }
+      return maxAreaContour;
     };
 
     
@@ -30,6 +41,7 @@ cv['onRuntimeInitialized']=()=>{
 
     let dst = new cv.Mat();
     makeHandMask(src, dst);
+    contours = getHandContour(dst, dst);
     cv.imshow('outputCanvas', dst);
     src.delete();
     dst.delete();
