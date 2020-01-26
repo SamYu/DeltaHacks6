@@ -14,7 +14,7 @@
     audio: false
   }, function(stream) {
     // video.src = vendorUrl.createObjectURL(stream); // depracated for chrome :c
-    video.srcObject=stream;
+    video.srcObject = stream;
     video.play();
   }, function(error) {
     // An error occured

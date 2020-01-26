@@ -27,6 +27,7 @@ cv['onRuntimeInitialized']=()=>{
     
     let imgElement = document.getElementById('imageSrc');
     let src = cv.imread(imgElement);
+    // let src = document.getElementById('canvas');
 
     let dst = new cv.Mat();
     makeHandMask(src, dst);
