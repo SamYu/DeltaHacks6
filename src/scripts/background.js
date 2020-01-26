@@ -19,3 +19,7 @@ chrome.browserAction.onClicked.addListener(function() {
     console.log('test');
     chrome.tabs.create({ url: chrome.extension.getURL('index.html') });
 });
+
+document.getElementById('test-btn').addEventListener('click', function() {
+  console.log('button works');
+})
