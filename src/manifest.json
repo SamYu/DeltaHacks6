@@ -1,7 +1,7 @@
 {
     "name": "DeltaHacks Extension",
     "version": "1.0",
-    "description": "Build an Extension!",
+    "description": "DeltaHack6 hack",
     "permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
     "background": {
         "scripts": ["scripts/background.js"],

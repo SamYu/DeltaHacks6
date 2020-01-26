@@ -1,4 +1,41 @@
 cv['onRuntimeInitialized']=()=>{
+  (function() {
+    var canvas = document.getElementById('canvas'),
+        context = canvas.getContext('2d'),
+        video = document.getElementById('video');
+        vendorUrl = window.URL || window.webkitURL;
+  
+    navigator.getMedia =  navigator.getUserMedia ||
+                          navigator.webkitGetUserMedia ||
+                          navigator.mozGetUserMedia ||
+                          navigator.msGetUserMedia;
+          
+    navigator.getUserMedia({
+      video: true,
+      audio: false
+    }, function(stream) {
+      // video.src = vendorUrl.createObjectURL(stream); // depracated for chrome :c
+      video.srcObject = stream;
+      video.play();
+    }, function(error) {
+      // An error occured
+    })
+  
+    video.addEventListener('play', function(){
+      setTimeout(track);
+      draw(this, context, 400, 280);
+    }, false);
+  
+    function draw(video, context, width, height) {
+      context.drawImage(video, 0, 0, width, height);
+      var can = document.getElementById('canvas');
+      track();
+      setTimeout(draw, 10, video, context, width, height);
+    }
+  
+  })();
+
+  function track() {
     // Define upper and lower bounds
     let skinColorLower = src => new cv.Mat(src.rows, src.cols, src.type(), [45, 48, 75, 0]);
     let skinColorUpper = src => new cv.Mat(src.rows, src.cols, src.type(), [130, 150, 190, 255]);
@@ -78,8 +115,10 @@ cv['onRuntimeInitialized']=()=>{
       return {hull, indices};
     }
 
-    let imgElement = document.getElementById('imageSrc');
-    let src = cv.imread(imgElement);
+    let canvas = document.getElementById('canvas');
+    let ctx = canvas.getContext('2d');
+    let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    let src = cv.matFromImageData(imgData);
 
     let dst = new cv.Mat();
     makeHandMask(src, dst);
@@ -88,4 +127,5 @@ cv['onRuntimeInitialized']=()=>{
     cv.imshow('outputCanvas', dst);
     src.delete();
     dst.delete();
+  };
 };
