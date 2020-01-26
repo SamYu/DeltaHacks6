@@ -1,5 +1,3 @@
-
-
 $("#checkbox").change(function() {
     if(this.checked) {
         let video = document.getElementById("player");

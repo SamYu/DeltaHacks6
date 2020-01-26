@@ -17,5 +17,5 @@ chrome.runtime.onInstalled.addListener(function() {
 
 chrome.browserAction.onClicked.addListener(function() {
     console.log('test');
-    chrome.tabs.create({ url: chrome.extension.getURL('test.html') });
+    chrome.tabs.create({ url: chrome.extension.getURL('index.html') });
 });
